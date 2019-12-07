@@ -1,6 +1,6 @@
 # buscacep
 
-A new Flutter project.
+Um aplicativo para consultar cep
 
 ## Getting Started
 
