@@ -7,6 +7,9 @@ Future<CepEndereco> getCep(String cep) async {
     final response = await http.get('https://viacep.com.br/ws/$cep/json/');
     if (response.statusCode == 200) {
       final responseJson = json.decode(response.body);
+      if (responseJson["erro"] != null) {
+        throw GeneralException(message: "CEP Não Encontrado");
+      }
 
       return CepEndereco.fromJson(responseJson);
     } else {

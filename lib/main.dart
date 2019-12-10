@@ -33,28 +33,38 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _resposta = "";
+  String _mensagemErro = "";
   CepEndereco _cepEndereco;
 
   bool isLoading = false;
   final myController = MaskedTextController(mask: '00000-000');
 
   void _getCEP() async {
+    _cepEndereco = null;
+    _mensagemErro = null;
+
     _setLoading(true);
-    final cepDoUsuario = myController.text;
     try {
+      final cepDoUsuario = myController.text;
       _cepEndereco = await service.getCep(cepDoUsuario);
+      _atualizaCepEndereco(_cepEndereco);
     } on GeneralException catch (e) {
-      _resposta = e.errorMessage();
+      _mensagemErro = e.errorMessage();
+      _atualizaMensagemErro(_mensagemErro);
     } finally {
       _setLoading(false);
-      _atualizaCampo(_resposta);
     }
   }
 
-  void _atualizaCampo(String valor) {
+  void _atualizaCepEndereco(CepEndereco cepEndereco) {
     setState(() {
-      _resposta = valor;
+      _cepEndereco = cepEndereco;
+    });
+  }
+
+  void _atualizaMensagemErro(String valor, ) {
+    setState(() {
+      _mensagemErro = valor;
     });
   }
 
@@ -96,16 +106,31 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Widget> _buildLayout() {
-    return [
+    List<Widget> widgets = [
       TextField(
           keyboardType: TextInputType.number,
           controller: myController,
           decoration: InputDecoration(
               hintText: "Digite o cep"
           )
-      ),
-      isLoading ? _buildCircularIndicator() : _buildCepCard(),
+      )
     ];
+
+    if (_mensagemErro != null) {
+      widgets.add(Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(_mensagemErro),
+      ));
+      return widgets;
+    }
+
+    if (_cepEndereco == null && !isLoading) {
+      return widgets;
+    }
+
+    widgets.add(isLoading ? _buildCircularIndicator() : _buildCepCard());
+
+    return widgets;
   }
 
   Widget _buildCircularIndicator() {
@@ -116,6 +141,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildCepCard() {
-    return CepCard(_cepEndereco, _resposta);
+    return CepCard(_cepEndereco, _mensagemErro);
   }
 }
