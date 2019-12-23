@@ -14,7 +14,8 @@ class CepEndereco {
   final String gia;
 
   factory CepEndereco.fromJson(Map<String, dynamic> json) {
-    return CepEndereco(json['cep'],
+    return CepEndereco(
+        json['cep'],
         json['logradouro'],
         json['complemento'],
         json['bairro'],
@@ -23,5 +24,20 @@ class CepEndereco {
         json['unidade'],
         json['ibge'],
         json['gia']);
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'cep': this.cep,
+      'logradouro' : this.logradouro,
+      'complemento' : this.complemento,
+      'bairro' : this.bairro,
+      'localidade' : this.localidade,
+      'uf' : this.uf,
+      'unidade' : this.unidade,
+      'ibge' : this.ibge,
+      'gia' : this.gia,
+
+    };
   }
 }

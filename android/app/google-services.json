@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "341526306136",
+    "firebase_url": "https://buscacep-261607.firebaseio.com",
+    "project_id": "buscacep-261607",
+    "storage_bucket": "buscacep-261607.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:341526306136:android:88593b8be9ea12271e192d",
+        "android_client_info": {
+          "package_name": "com.example.buscacep"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "341526306136-fec4k2ch6j87batrk06aoi8g2m4q7me6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpb--kNwyrVQDLDqYZsk69x6cQmZAEQY0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "341526306136-fec4k2ch6j87batrk06aoi8g2m4q7me6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "341526306136-kj9t8g4tojvmkp5ghdamvks2078a1rvj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.buscacep"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

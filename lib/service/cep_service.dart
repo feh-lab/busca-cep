@@ -16,3 +16,4 @@ Future<CepEndereco> getCep(String cep) async {
       throw GeneralException(message:"CEP Invalido");
     }
 }
+

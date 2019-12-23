@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 
 class CepCard extends StatelessWidget {
   final CepEndereco _cepEndereco;
-  final String _message;
-
-  CepCard(this._cepEndereco, this._message);
+  final VoidCallback callback;
+  CepCard(this._cepEndereco, {this.callback});
 
   String get formataTitulo {
     return _cepEndereco.logradouro;
@@ -18,27 +17,25 @@ class CepCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> responseList = [];
+    List<Widget> responseList = [
 
-    if (_cepEndereco == null) {
-      responseList.add(Text(_message));
-    } else {
-      responseList.addAll([
-        ListTile(
-          isThreeLine: true,
-          leading: Icon(Icons.pin_drop, color: CepColors.blue),
-          title: Text('$formataTitulo'),
-          subtitle: Text('$formataSubtitulo'),
-        ),
-      ]);
-    }
+    ];
 
+    responseList.addAll([
+      ListTile(
+        isThreeLine: true,
+        leading: Icon(Icons.pin_drop, color: CepColors.blue),
+        title: Text('$formataTitulo'),
+        subtitle: Text('$formataSubtitulo'),
+        onTap: callback,
+      ),
+    ]);
     return Padding(
-      padding: const EdgeInsets.only(top: 16.0),
+      padding: const EdgeInsets.only(top: 2.0),
       child: Card(
         child: Container(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
+            child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: responseList,
           ),
